@@ -1,0 +1,1555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AK's Beauty Zone | Salon in Namak Mandi, Ujjain</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --primary: #e91e63;
+      --primary-dark: #c2185b;
+      --accent: #ffd54f;
+      --bg: #05030a;
+      --bg-alt: #120820;
+      --text-main: #ffffff;
+      --text-muted: #c1b9d8;
+      --card-bg: #1c102a;
+      --border-soft: rgba(255, 255, 255, 0.08);
+      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.55);
+      --radius-xl: 24px;
+      --transition-fast: 0.25s ease;
+      --transition-med: 0.4s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: radial-gradient(circle at top left, #3d1a5a 0, #05030a 40%);
+      color: var(--text-main);
+      min-height: 100vh;
+    }
+
+    /* ===== Scrollbar ===== */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0b0514;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(var(--primary), var(--accent));
+      border-radius: 20px;
+    }
+
+    /* ===== Navigation ===== */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(
+        to right,
+        rgba(5, 3, 10, 0.95),
+        rgba(12, 6, 25, 0.96)
+      );
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .nav {
+      max-width: 1150px;
+      margin: 0 auto;
+      padding: 0.9rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .brand-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #ffe082, #e91e63);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1a0310;
+      font-weight: 800;
+      letter-spacing: 1px;
+      box-shadow: 0 0 20px rgba(233, 30, 99, 0.5);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .brand-text span:first-child {
+      font-weight: 700;
+      font-size: 1.15rem;
+    }
+
+    .brand-text span:last-child {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      position: relative;
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      transition: width var(--transition-fast);
+      border-radius: 999px;
+    }
+
+    .nav-links a:hover {
+      color: #fff;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      padding: 0.55rem 1.2rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: radial-gradient(
+        circle at top left,
+        rgba(255, 213, 79, 0.15),
+        rgba(233, 30, 99, 0.45)
+      );
+      color: #fff;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform var(--transition-fast),
+        box-shadow var(--transition-fast), background var(--transition-fast);
+      box-shadow: 0 10px 30px rgba(233, 30, 99, 0.48);
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 45px rgba(233, 30, 99, 0.6);
+      background: radial-gradient(
+        circle at top right,
+        rgba(255, 255, 255, 0.12),
+        rgba(233, 30, 99, 0.9)
+      );
+    }
+
+    .menu-toggle {
+      display: none;
+      width: 26px;
+      height: 22px;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+
+    .menu-toggle span {
+      height: 3px;
+      border-radius: 999px;
+      background: #fff;
+      transition: all 0.25s ease;
+    }
+
+    /* ===== Layout ===== */
+    main {
+      max-width: 1150px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 4rem;
+    }
+
+    section {
+      margin: 3.5rem 0;
+    }
+
+    /* ===== Hero ===== */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .hero-left {
+      position: relative;
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.3rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(21, 9, 40, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .hero-pill span.highlight-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #ffeb3b, #ff9800);
+      box-shadow: 0 0 10px rgba(255, 235, 59, 0.8);
+    }
+
+    .hero-title {
+      font-size: clamp(2.35rem, 3vw + 1rem, 3.4rem);
+      line-height: 1.1;
+      margin-bottom: 0.9rem;
+    }
+
+    .hero-title span {
+      background: linear-gradient(to right, #ffeb3b, #e91e63);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 0.95rem;
+      max-width: 420px;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero-badge {
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      background: rgba(17, 8, 34, 0.9);
+    }
+
+    .hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .btn-primary,
+    .btn-ghost {
+      border-radius: 999px;
+      padding: 0.9rem 1.6rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: transform var(--transition-fast),
+        box-shadow var(--transition-fast),
+        background var(--transition-fast), color var(--transition-fast);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: #13020b;
+      box-shadow: 0 12px 35px rgba(233, 30, 99, 0.65);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 45px rgba(233, 30, 99, 0.85);
+    }
+
+    .btn-ghost {
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      background: transparent;
+      color: var(--text-main);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255, 255, 255, 0.04);
+      transform: translateY(-2px);
+    }
+
+    .hero-right {
+      position: relative;
+    }
+
+    .hero-card {
+      position: relative;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      background: radial-gradient(circle at top, #ff8a80, #311b92);
+      box-shadow: var(--shadow-soft);
+      min-height: 280px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: stretch;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        circle at 20% 0,
+        rgba(255, 255, 255, 0.4),
+        transparent 55%
+      );
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    .hero-card-content {
+      position: relative;
+      width: 100%;
+      padding: 1.4rem 1.4rem 1rem;
+      background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.75),
+        rgba(0, 0, 0, 0.1)
+      );
+    }
+
+    .hero-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.8rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .hero-card-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .hero-card-tag {
+      font-size: 0.75rem;
+      padding: 0.35rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      color: #ffe082;
+    }
+
+    .hero-card-sub {
+      font-size: 0.8rem;
+      color: #fbe9e7;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 1.2rem;
+      margin-top: 0.8rem;
+      font-size: 0.85rem;
+    }
+
+    .hero-stat span:first-child {
+      display: block;
+      font-weight: 700;
+    }
+
+    .hero-floating {
+      position: absolute;
+      right: -12px;
+      top: 18%;
+      padding: 0.7rem 0.9rem;
+      border-radius: 18px;
+      background: rgba(6, 3, 12, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      font-size: 0.78rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      backdrop-filter: blur(10px);
+      transform: translateX(0);
+      animation: floatX 3.4s ease-in-out infinite alternate;
+    }
+
+    .hero-floating strong {
+      color: #fff59d;
+    }
+
+    @keyframes floatX {
+      to {
+        transform: translateX(-14px) translateY(4px);
+      }
+    }
+
+    .hero-badge-location {
+      position: absolute;
+      left: -8px;
+      bottom: 18px;
+      padding: 0.6rem 0.9rem;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 18px;
+      font-size: 0.78rem;
+      backdrop-filter: blur(8px);
+    }
+
+    /* ===== Section headings ===== */
+    .section-header {
+      margin-bottom: 1.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+    }
+
+    .section-title span {
+      color: var(--accent);
+    }
+
+    .section-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      max-width: 420px;
+    }
+
+    /* ===== Services ===== */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+
+    .service-card {
+      position: relative;
+      border-radius: var(--radius-xl);
+      padding: 1.3rem 1.3rem 1.2rem;
+      background: radial-gradient(circle at top left, #311b92, #0b0615);
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+      overflow: hidden;
+      cursor: pointer;
+      transform: translateY(0);
+      transition: transform var(--transition-med), box-shadow var(--transition-med),
+        border-color var(--transition-med), background var(--transition-med);
+    }
+
+    .service-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        circle at 10% 0,
+        rgba(255, 255, 255, 0.08),
+        transparent 55%
+      );
+      opacity: 0;
+      transition: opacity var(--transition-med);
+      pointer-events: none;
+    }
+
+    .service-emoji {
+      font-size: 1.6rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .service-title {
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+      font-weight: 600;
+    }
+
+    .service-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 0.7rem;
+    }
+
+    .service-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      font-size: 0.75rem;
+    }
+
+    .service-tag {
+      padding: 0.22rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+    }
+
+    .service-hover-price {
+      position: absolute;
+      right: 14px;
+      bottom: 12px;
+      font-size: 0.78rem;
+      color: #ffecb3;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity var(--transition-med), transform var(--transition-med);
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: 0 20px 55px rgba(7, 2, 18, 0.95);
+      border-color: rgba(255, 255, 255, 0.24);
+      background: radial-gradient(circle at top left, #4527a0, #0b0615);
+    }
+
+    .service-card:hover::before {
+      opacity: 1;
+    }
+
+    .service-card:hover .service-hover-price {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== Gallery ===== */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: #120820;
+      cursor: zoom-in;
+    }
+
+    .gallery-item.large {
+      grid-row: span 2;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.03);
+      transition: transform 0.6s ease, filter 0.6s ease;
+      display: block;
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.6),
+        rgba(0, 0, 0, 0.05)
+      );
+      opacity: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0.8rem;
+      transition: opacity 0.4s ease;
+      font-size: 0.8rem;
+    }
+
+    .gallery-overlay strong {
+      font-size: 0.9rem;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.08);
+      filter: brightness(1.05);
+    }
+
+    .gallery-item:hover .gallery-overlay {
+      opacity: 1;
+    }
+
+    /* ===== Highlights / Stats ===== */
+    .highlights {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1.2rem;
+    }
+
+    .highlight-card {
+      padding: 1rem 1rem 0.9rem;
+      border-radius: 18px;
+      background: rgba(15, 7, 30, 0.9);
+      border: 1px solid var(--border-soft);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .highlight-number {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+      background: linear-gradient(to right, #fff59d, #ff80ab);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    /* ===== Packages ===== */
+    .packages-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+
+    .package-card {
+      border-radius: var(--radius-xl);
+      background: radial-gradient(circle at top, #4a148c, #05030a);
+      border: 1px solid var(--border-soft);
+      padding: 1.3rem 1.2rem 1.4rem;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .package-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+    }
+
+    .package-title {
+      font-size: 1.1rem;
+      margin: 0.25rem 0 0.1rem;
+      font-weight: 600;
+    }
+
+    .package-price {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      color: #ffecb3;
+    }
+
+    .package-list {
+      list-style: none;
+      margin: 0.6rem 0 0.9rem;
+      padding-left: 0;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .package-list li {
+      margin-bottom: 0.2rem;
+      position: relative;
+      padding-left: 1rem;
+    }
+
+    .package-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: #c5e1a5;
+      font-size: 0.75rem;
+    }
+
+    .package-cta {
+      padding: 0.6rem 1rem;
+      border-radius: 999px;
+      border: 1px dashed rgba(255, 255, 255, 0.35);
+      font-size: 0.78rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: background var(--transition-fast),
+        transform var(--transition-fast);
+    }
+
+    .package-cta:hover {
+      background: rgba(255, 255, 255, 0.04);
+      transform: translateY(-1px);
+    }
+
+    .package-ribbon {
+      position: absolute;
+      right: -40px;
+      top: 12px;
+      background: linear-gradient(135deg, #ffeb3b, #ff9800);
+      color: #2b0b0b;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.4rem 1.3rem;
+      transform: rotate(32deg);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    /* ===== Testimonials ===== */
+    .testimonials {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 1.8rem;
+      align-items: center;
+    }
+
+    .testimonial-card {
+      background: rgba(11, 6, 24, 0.95);
+      border-radius: var(--radius-xl);
+      padding: 1.5rem 1.6rem;
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+    }
+
+    .testimonial-quote {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.85rem;
+    }
+
+    .testimonial-author strong {
+      font-size: 0.9rem;
+    }
+
+    .testimonial-stars {
+      font-size: 0.8rem;
+      color: #ffeb3b;
+    }
+
+    .testimonial-note {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 0.8rem;
+    }
+
+    .review-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.4rem;
+      font-size: 0.75rem;
+    }
+
+    .review-pill {
+      padding: 0.2rem 0.65rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(20, 10, 40, 0.9);
+    }
+
+    /* ===== Contact / Appointment ===== */
+    .contact-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 1.8rem;
+    }
+
+    .form-card {
+      border-radius: var(--radius-xl);
+      background: rgba(13, 7, 28, 0.96);
+      border: 1px solid var(--border-soft);
+      padding: 1.4rem 1.6rem 1.5rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.8rem;
+    }
+
+    .form-group {
+      margin-bottom: 0.85rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.8rem;
+      margin-bottom: 0.25rem;
+      color: var(--text-muted);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.6rem 0.75rem;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: #05030b;
+      color: #fff;
+      font-size: 0.85rem;
+      outline: none;
+      transition: border-color var(--transition-fast),
+        box-shadow var(--transition-fast), background var(--transition-fast);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 70px;
+      max-height: 140px;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 1px rgba(233, 30, 99, 0.5);
+      background: #0b0415;
+    }
+
+    .form-footer {
+      margin-top: 0.6rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+    }
+
+    .contact-info-card {
+      border-radius: var(--radius-xl);
+      background: radial-gradient(circle at top, #4a148c, #05030b);
+      border: 1px solid var(--border-soft);
+      padding: 1.4rem 1.5rem;
+      font-size: 0.85rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .contact-info-card h3 {
+      margin-bottom: 0.4rem;
+    }
+
+    .contact-list {
+      list-style: none;
+      margin: 0.4rem 0 0.9rem;
+      padding-left: 0;
+    }
+
+    .contact-list li {
+      margin-bottom: 0.35rem;
+      color: var(--text-muted);
+    }
+
+    .contact-map {
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      margin-top: 0.7rem;
+    }
+
+    .contact-map iframe {
+      width: 100%;
+      height: 200px;
+      border: 0;
+    }
+
+    /* ===== Footer ===== */
+    footer {
+      border-top: 1px solid var(--border-soft);
+      padding: 1.1rem 1.5rem 1.6rem;
+      max-width: 1150px;
+      margin: 0 auto;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    /* ===== Scroll animation ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .hero-right {
+        order: -1;
+      }
+      .services-grid,
+      .packages-grid,
+      .gallery-grid,
+      .highlights {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .testimonials,
+      .contact-layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .hero-card {
+        min-height: 260px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav {
+        padding-inline: 1rem;
+      }
+
+      .nav-links {
+        position: absolute;
+        inset-inline: 0;
+        top: 100%;
+        background: rgba(5, 3, 10, 0.98);
+        padding: 0.7rem 1.5rem 0.9rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.7rem;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.25s ease-out;
+      }
+
+      .nav-links.open {
+        max-height: 220px;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      .nav-cta {
+        display: none;
+      }
+
+      main {
+        padding-inline: 1rem;
+      }
+
+      .services-grid,
+      .packages-grid,
+      .gallery-grid,
+      .highlights {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      section {
+        margin: 3rem 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- ===== NAVBAR ===== -->
+  <header>
+    <nav class="nav">
+      <div class="brand">
+        <div class="brand-logo">AK</div>
+        <div class="brand-text">
+          <span>AK's Beauty Zone</span>
+          <span>23, Namak Mandi · Ujjain</span>
+        </div>
+      </div>
+
+      <div class="menu-toggle" id="menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <div class="nav-links" id="nav-links">
+        <a href="#services">Services</a>
+        <a href="#gallery">Studio</a>
+        <a href="#packages">Bridal & Deals</a>
+        <a href="#contact">Book</a>
+      </div>
+
+      <button class="nav-cta" onclick="scrollToSection('contact')">
+        Book Appointment
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+      <div class="hero-left reveal">
+        <div class="hero-pill">
+          <span class="highlight-dot"></span>
+          Ujjain’s curated hair, beauty & bridal studio
+        </div>
+        <h1 class="hero-title">
+          Glow up at <span>AK's Beauty Zone</span>
+        </h1>
+        <p class="hero-subtitle">
+          From everyday glam to once-in-a-lifetime bridal looks, our artists
+          craft styles that feel luxurious, modern and uniquely you.
+        </p>
+
+        <div class="hero-badge-row">
+          <div class="hero-badge">Hair · Makeup · Skin · Bridal</div>
+          <div class="hero-badge">Unisex salon · Hygienic & cozy space</div>
+        </div>
+
+        <div class="hero-cta-row">
+          <button class="btn-primary" onclick="scrollToSection('contact')">
+            Book your slot
+            <span>→</span>
+          </button>
+          <button class="btn-ghost" onclick="scrollToSection('services')">
+            View services
+          </button>
+        </div>
+      </div>
+
+      <div class="hero-right reveal">
+        <div class="hero-card">
+          <!-- You can also set a background image of the salon here if you like -->
+          <div class="hero-card-content">
+            <div class="hero-card-header">
+              <div>
+                <div class="hero-card-title">Inside AK’s Studio</div>
+                <div class="hero-card-sub">
+                  Warm, private cabins for facials, hair spa & bridal prep.
+                </div>
+              </div>
+              <div class="hero-card-tag">Certified Artists</div>
+            </div>
+
+            <div class="hero-stats">
+              <div class="hero-stat">
+                <span>500+</span>
+                <small>Happy makeovers</small>
+              </div>
+              <div class="hero-stat">
+                <span>4.9★</span>
+                <small>Client rating</small>
+              </div>
+              <div class="hero-stat">
+                <span>7+</span>
+                <small>Years in beauty</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-floating">
+            <span>Today’s offers</span>
+            <strong>Hair spa + Cleanup</strong>
+            <span>at a special combo price</span>
+          </div>
+
+          <div class="hero-badge-location">
+            📍 23, Namak Mandi, Ujjain · Near main market
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SERVICES ===== -->
+    <section id="services">
+      <div class="section-header reveal">
+        <div>
+          <h2 class="section-title">All things <span>beauty</span> under one roof</h2>
+          <p class="section-subtitle">
+            We offer complete hair, makeup, skin and bridal services so you can
+            walk out ready for any occasion – from college fests to big fat
+            Indian weddings.
+          </p>
+        </div>
+      </div>
+
+      <div class="services-grid">
+        <article class="service-card reveal">
+          <div class="service-emoji">💇‍♀️</div>
+          <h3 class="service-title">Haircuts & Styling</h3>
+          <p class="service-desc">
+            Trendy cuts, blow-dries, curls, straightening and fresh global hair
+            colours that match your vibe.
+          </p>
+          <div class="service-tags">
+            <span class="service-tag">Unisex</span>
+            <span class="service-tag">Global color</span>
+            <span class="service-tag">Smoothening</span>
+          </div>
+          <div class="service-hover-price">Starting at ₹299</div>
+        </article>
+
+        <article class="service-card reveal">
+          <div class="service-emoji">💄</div>
+          <h3 class="service-title">Party & Bridal Makeup</h3>
+          <p class="service-desc">
+            Soft glam to full bridal, HD & waterproof makeup that lasts
+            comfortably through pheras & photos.
+          </p>
+          <div class="service-tags">
+            <span class="service-tag">HD / Airbrush</span>
+            <span class="service-tag">Siders & family</span>
+            <span class="service-tag">Mehendi / Sangeet</span>
+          </div>
+          <div class="service-hover-price">Bridal packages from ₹7,999</div>
+        </article>
+
+        <article class="service-card reveal">
+          <div class="service-emoji">✨</div>
+          <h3 class="service-title">Facials & Skin Rituals</h3>
+          <p class="service-desc">
+            Deep-cleansing, brightening and bridal facials with steam, masks and
+            massages for instant glow.
+          </p>
+          <div class="service-tags">
+            <span class="service-tag">Cleanup</span>
+            <span class="service-tag">De-tan</span>
+            <span class="service-tag">Premium facials</span>
+          </div>
+          <div class="service-hover-price">Glow facials from ₹699</div>
+        </article>
+
+        <article class="service-card reveal">
+          <div class="service-emoji">🧖‍♀️</div>
+          <h3 class="service-title">Hair Spa & Treatments</h3>
+          <p class="service-desc">
+            Relaxing head massage, steam and nourishing masks to repair damage
+            and add shine.
+          </p>
+          <div class="service-tags">
+            <span class="service-tag">Anti-frizz</span>
+            <span class="service-tag">Keratin boost</span>
+          </div>
+          <div class="service-hover-price">Combos from ₹999</div>
+        </article>
+
+        <article class="service-card reveal">
+          <div class="service-emoji">👰</div>
+          <h3 class="service-title">Complete Bridal Packages</h3>
+          <p class="service-desc">
+            Pre-bridal rituals, mehendi, sangeet, engagement & wedding day
+            makeup + hairstyling & draping.
+          </p>
+          <div class="service-tags">
+            <span class="service-tag">Custom looks</span>
+            <span class="service-tag">Home service*</span>
+          </div>
+          <div class="service-hover-price">Customised quote</div>
+        </article>
+
+        <article class="service-card reveal">
+          <div class="service-emoji">🪮</div>
+          <h3 class="service-title">Grooming Essentials</h3>
+          <p class="service-desc">
+            Threading, waxing, manicure, pedicure and scalp care for a neat,
+            polished everyday look.
+          </p>
+          <div class="service-tags">
+            <span class="service-tag">Brows & lashes</span>
+            <span class="service-tag">Hands & feet</span>
+          </div>
+          <div class="service-hover-price">At pocket-friendly prices</div>
+        </article>
+      </div>
+
+      <div class="highlights">
+        <div class="highlight-card reveal">
+          <div class="highlight-number">Same-day</div>
+          <div>Last-minute party looks & hair styling accepted based on slot availability.</div>
+        </div>
+        <div class="highlight-card reveal">
+          <div class="highlight-number">Sanitized</div>
+          <div>Fresh linens, sanitized tools & private cabins for facials and bridal work.</div>
+        </div>
+        <div class="highlight-card reveal">
+          <div class="highlight-number">Custom</div>
+          <div>We tailor packages to your skin type, outfit, jewellery & event timing.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== GALLERY ===== -->
+    <section id="gallery">
+      <div class="section-header reveal">
+        <div>
+          <h2 class="section-title">Take a peek into our <span>studio</span></h2>
+          <p class="section-subtitle">
+            These are actual pictures from AK’s Beauty Zone – cozy facial room,
+            styling corner and product shelves. Replace the image links with
+            your own files for best quality.
+          </p>
+        </div>
+      </div>
+
+      <div class="gallery-grid">
+        <!-- Replace src with your first image (facial room) -->
+        <figure class="gallery-item large reveal">
+          <img src="/image1.webp" alt="Facial and skincare room at AK's Beauty Zone" />
+          <figcaption class="gallery-overlay">
+            <strong>Facial & skincare cabin</strong>
+            <span>Comfortable bed, steam machine & curated facial products.</span>
+          </figcaption>
+        </figure>
+
+        <!-- Replace src with your second image (hair / styling area) -->
+        <figure class="gallery-item reveal">
+          <img src="/image 2.webp" alt="Hair styling and makeup area at AK's Beauty Zone" />
+          <figcaption class="gallery-overlay">
+            <strong>Hair & styling corner</strong>
+            <span>Dedicated area for hair spa, blow-dries and styling.</span>
+          </figcaption>
+        </figure>
+
+        <!-- Extra placeholders (keep or replace) -->
+        <figure class="gallery-item reveal">
+          <img src="https://images.pexels.com/photos/3738341/pexels-photo-3738341.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Makeup brushes" />
+          <figcaption class="gallery-overlay">
+            <strong>Premium products</strong>
+            <span>Branded makeup & skincare carefully chosen for all skin types.</span>
+          </figcaption>
+        </figure>
+
+        <figure class="gallery-item reveal">
+          <img src="https://images.pexels.com/photos/853427/pexels-photo-853427.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Bridal hairstyling" />
+          <figcaption class="gallery-overlay">
+            <strong>Hairstyles that last</strong>
+            <span>Elegant buns, soft curls & traditional bridal styles.</span>
+          </figcaption>
+        </figure>
+
+        <figure class="gallery-item reveal">
+          <img src="https://images.pexels.com/photos/3762873/pexels-photo-3762873.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Bridal makeup" />
+          <figcaption class="gallery-overlay">
+            <strong>Bridal glow</strong>
+            <span>Camera-ready finishes without feeling cakey.</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ===== PACKAGES ===== -->
+    <section id="packages">
+      <div class="section-header reveal">
+        <div>
+          <h2 class="section-title">
+            Curated <span>packages</span> for every occasion
+          </h2>
+          <p class="section-subtitle">
+            Tell us your budget and we’ll customize the services. These are
+            sample packages – final pricing depends on skin type, hair length
+            and add-ons.
+          </p>
+        </div>
+      </div>
+
+      <div class="packages-grid">
+        <article class="package-card reveal">
+          <span class="package-label">For quick events</span>
+          <h3 class="package-title">Party Ready</h3>
+          <div class="package-price">₹1,499 onwards</div>
+          <ul class="package-list">
+            <li>Soft glam makeup</li>
+            <li>Simple hairstyle / blow-dry</li>
+            <li>Liner, lashes & lipstick</li>
+            <li>Basic cleanup or sheet mask</li>
+          </ul>
+          <button class="package-cta" onclick="scrollToSection('contact')">
+            Reserve Party Look →
+          </button>
+        </article>
+
+        <article class="package-card reveal">
+          <div class="package-ribbon">Most Loved</div>
+          <span class="package-label">Full bridal day</span>
+          <h3 class="package-title">Bridal Signature</h3>
+          <div class="package-price">Custom Quote</div>
+          <ul class="package-list">
+            <li>Trial consultation for look & jewellery</li>
+            <li>HD bridal makeup & hairstyle</li>
+            <li>Draping & hair accessories placement</li>
+            <li>Pre-bridal facial & detan session</li>
+          </ul>
+          <button class="package-cta" onclick="scrollToSection('contact')">
+            Talk to bridal expert →
+          </button>
+        </article>
+
+        <article class="package-card reveal">
+          <span class="package-label">Self-care day</span>
+          <h3 class="package-title">Hair & Skin Reset</h3>
+          <div class="package-price">₹2,499 onwards</div>
+          <ul class="package-list">
+            <li>Advanced hair spa with steam</li>
+            <li>Glow facial + de-tan</li>
+            <li>Eyebrows & upper lip threading</li>
+            <li>Relaxing massage add-on</li>
+          </ul>
+          <button class="package-cta" onclick="scrollToSection('contact')">
+            Book self-care slot →
+          </button>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== TESTIMONIALS ===== -->
+    <section>
+      <div class="testimonials">
+        <div class="testimonial-card reveal">
+          <p class="testimonial-quote">
+            “I got my bridal makeup and pre-bridal done at AK’s Beauty Zone and
+            absolutely loved it. The studio is cozy, hygienic and they listened
+            to every small detail. My look stayed perfect from mandap to
+            reception photos.”
+          </p>
+          <div class="testimonial-author">
+            <div>
+              <strong>Simran Sharma</strong>
+              <div>Ujjain bride · Bridal package</div>
+            </div>
+            <div class="testimonial-stars">★★★★★</div>
+          </div>
+          <p class="testimonial-note">
+            Every appointment starts with a short skin & hair check so we can
+            advise you better.
+          </p>
+          <div class="review-pills">
+            <span class="review-pill">On-time & professional</span>
+            <span class="review-pill">Comfortable studio</span>
+            <span class="review-pill">Value for money</span>
+          </div>
+        </div>
+
+        <div class="testimonial-side reveal">
+          <h2 class="section-title">Why clients <span>love</span> AK’s</h2>
+          <p class="section-subtitle">
+            We believe in calm vibes, honest suggestions and looks that enhance
+            your natural features. No force-selling, just personalised beauty
+            guidance.
+          </p>
+          <ul class="contact-list">
+            <li>• Looks planned around your outfits & jewellery</li>
+            <li>• Skin-safe products for sensitive skin</li>
+            <li>• Time-bound appointments, no long waits</li>
+            <li>• Home visit for bridal makeup (on request)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT / BOOKING ===== -->
+    <section id="contact">
+      <div class="section-header reveal">
+        <div>
+          <h2 class="section-title">Book your <span>appointment</span></h2>
+          <p class="section-subtitle">
+            Share your details and we’ll confirm your slot by call or WhatsApp.
+            You can also walk in at the studio at Namak Mandi, Ujjain.
+          </p>
+        </div>
+      </div>
+
+      <div class="contact-layout">
+        <div class="form-card reveal">
+          <form onsubmit="handleSubmit(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Full name</label>
+                <input id="name" name="name" type="text" placeholder="Your name" required />
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone / WhatsApp</label>
+                <input id="phone" name="phone" type="tel" placeholder="8369889575" required />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="service">Service</label>
+                <select id="service" name="service" required>
+                  <option value="">Select a service</option>
+                  <option>Haircut / Styling</option>
+                  <option>Party Makeup</option>
+                  <option>Bridal Package</option>
+                  <option>Facial / Skin</option>
+                  <option>Hair Spa / Treatment</option>
+                  <option>Grooming (waxing, threading etc.)</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="date">Preferred date</label>
+                <input id="date" name="date" type="date" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="time">Preferred time</label>
+              <select id="time" name="time">
+                <option value="">Any time</option>
+                <option>10:00 AM – 12:00 PM</option>
+                <option>12:00 PM – 3:00 PM</option>
+                <option>3:00 PM – 6:00 PM</option>
+                <option>After 6:00 PM</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Anything we should know?</label>
+              <textarea
+                id="message"
+                name="message"
+                placeholder="Hair length, skin concerns, bridal outfit colour, etc."
+              ></textarea>
+            </div>
+
+            <div class="form-footer">
+              <button type="submit" class="btn-primary">
+                Send Booking Request
+              </button>
+              <span>
+                We usually respond within a few hours during working time.
+              </span>
+            </div>
+          </form>
+        </div>
+
+        <aside class="contact-info-card reveal">
+          <h3>Visit AK's Beauty Zone</h3>
+          <ul class="contact-list">
+            <li>📍 23, Namak Mandi, Ujjain, Madhya Pradesh</li>
+            
+            <li>📱 WhatsApp: +91-8369889575</li>
+            <li>🕒 Open: 10:00 AM – 8:00 PM (All days)</li>
+          </ul>
+          <div class="contact-map">
+            <!-- You can replace this iframe with your exact Google Maps embed -->
+            <iframe
+              loading="lazy"
+              allowfullscreen
+              referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28559.649347773014!2d75.774!3d23.1765!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3963744595b7e7fb%3A0x4c4b73007a0795d1!2sNamak%20Mandi%2C%20Ujjain!5e0!3m2!1sen!2sin!4v0000000000000"
+            ></iframe>
+          </div>
+          <p class="testimonial-note">
+            Tip: Share your reference photos on WhatsApp after booking so we can
+            pre-plan your look.
+          </p>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>© <span id="year"></span> AK's Beauty Zone, Namak Mandi, Ujjain.</span>
+    <span>Hand-crafted salon experience · Powered by love & good hair days.</span>
+  </footer>
+
+  <script>
+    // Smooth scroll helper
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById("menu-toggle");
+    const navLinks = document.getElementById("nav-links");
+
+    menuToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("open");
+      menuToggle.classList.toggle("active");
+    });
+
+    // Small transform for hamburger icon
+    menuToggle.addEventListener("click", () => {
+      const spans = menuToggle.querySelectorAll("span");
+      const active = menuToggle.classList.contains("active");
+      spans[0].style.transform = active
+        ? "translateY(9px) rotate(45deg)"
+        : "";
+      spans[1].style.opacity = active ? "0" : "1";
+      spans[2].style.transform = active
+        ? "translateY(-9px) rotate(-45deg)"
+        : "";
+    });
+
+    // Reveal on scroll (IntersectionObserver)
+    const reveals = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    reveals.forEach((el) => observer.observe(el));
+
+    // Demo form handler
+    function handleSubmit(e) {
+      e.preventDefault();
+      alert(
+        "Thank you! Your booking request has been captured.\nThe AK's Beauty Zone team will contact you soon to confirm your slot."
+      );
+      e.target.reset();
+    }
+
+    // Footer year
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
